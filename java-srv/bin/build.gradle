@@ -1,0 +1,46 @@
+/*
+    gradle clean build bootRun
+*/
+
+buildscript {
+  repositories { jcenter() }
+  dependencies { classpath "org.springframework.boot:spring-boot-gradle-plugin:2.4.2" }
+}
+
+plugins {
+  id 'com.github.ben-manes.versions' version '0.13.0' // gradle dependencyUpdates
+  id "io.spring.dependency-management" version '1.0.11.RELEASE'
+  id 'net.saliman.properties' version '1.4.5'
+  id 'org.springframework.boot' version '2.4.2'
+}
+
+apply plugin: 'scala'
+
+targetCompatibility = sourceCompatibility = JavaVersion.VERSION_1_8
+
+group = group
+
+jar {
+  version = version
+  baseName = baseName
+}
+
+repositories { jcenter() }
+
+ext {
+  orientdbVersion = '3.0.5'
+}
+
+dependencies {
+    implementation 'org.scala-lang:scala-library:2.13.1'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation "com.orientechnologies:orientdb-core:${orientdbVersion}"
+    implementation "com.orientechnologies:orientdb-client:${orientdbVersion}"
+    implementation "com.orientechnologies:orientdb-object:${orientdbVersion}"
+    implementation "com.orientechnologies:orientdb-graphdb:${orientdbVersion}"
+    implementation 'javax.annotation:javax.annotation-api:1.3.2'
+}
+
+defaultTasks "clean", "build"
